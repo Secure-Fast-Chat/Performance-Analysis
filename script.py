@@ -2,17 +2,18 @@ from pwn import process
 import os
 import datetime
 import time
+import os
 
 # os.chdir('../Server-Side')
 # s = process(['python3', 'loadbalancer.py'])
 p = []
-n=10
+n=30
 for i in range(n):
     p.append(process(['python3','../Client_Side/app.py']))
     print(p[i].recvuntil(")\n"))
     print(p[i].recvuntil(":"))
 
-    # Signup
+    #Signup
     # print(p[i].recvuntil(":"))
     # p[i].sendline(b'2')
     # print(p[i].recvuntil(":"))
@@ -52,3 +53,12 @@ for i in range(n):
     logout = "\logout"
     p[i].sendline(logout.encode('utf-8'))
 
+with open(os.path.join(os.path.expanduser('~'),'SecureFastChatMessages.txt'), 'r') as f:
+    lines = f.readlines()
+    timediff = 0
+    for line in lines:
+        print(line)
+        times = line.split("\t")
+        timediff += -float(times[0]) + float(times[1])
+    latency = timediff/len(lines)
+    print(f"latency = {latency}")

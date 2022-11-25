@@ -56,3 +56,5 @@ os.system("cat SecureFastChatlogs_* | grep Rec | cut -d ':' -f 1 > recv_time")
 os.system("cat SecureFastChatlogs_* | grep Sent | cut -d ':' -f 1 > send_time")
 # os.system("awk '{if(FR==NFR){countr++;sumr+=$1}else{counts++;sums+=$1}}END{print(sumr-sums);print(countr,counts)}' recv_time send_time")
 os.system("awk '{count++;if(NR==FNR){countr++;sumr+=$1} else {if(counts<countr){counts++;sums+=$1}}}END{print(sumr-sums);print(countr);print(counts)}' recv_time send_time")
+
+os.system("rm SecureFastChat*")

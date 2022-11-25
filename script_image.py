@@ -39,12 +39,12 @@ while True:
         os.system('rm SecureFastChat*')
     if count == 169:
         break
-    i = random.randint(0,8)
+    i = random.randint(0,n-1)
     try:
-        time.sleep(random.gauss(0.5,0.1))
-        sendMsgCommand = '\send 9 '+ str(datetime.datetime.timestamp(datetime.datetime.now()))
+        time.sleep(abs(random.gauss(0.1,0.05)))
+        sendMsgCommand = '\send ' + str(random.randint(0,n-1)) + '0'*random.randint(0,400)
         k = random.random()
-        print(k)
+        # print(k)
         # p[i].sendline(sendMsgCommand.encode('utf-8'))
         if k>args.ratio_img_senders:
             p[i].sendline(sendMsgCommand.encode('utf-8'))
@@ -53,7 +53,7 @@ while True:
     except KeyboardInterrupt:
         print(i)
         break
-    except:
+    except Exception as e:
         time.sleep(2)
         print(p[i].recv())
         print(e)

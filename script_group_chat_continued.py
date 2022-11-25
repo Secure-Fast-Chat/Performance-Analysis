@@ -1,4 +1,5 @@
 from pwn import process
+import math
 import random
 import os
 import datetime
@@ -23,9 +24,13 @@ time.sleep(5)
 print('reached')
 
 t = 1
-while True:
-    time.sleep(t)
-    i = random.randint(0,9)
-    # print(i)
-    # print(p[i])
-    p[i].sendline(f'\\sendgrp grp {i} I am Here {str(datetime.datetime.timestamp(datetime.datetime.now()))}')
+try:
+    while True:
+        time.sleep(abs(random.gauss(0.5,0.2)))
+        i = random.randint(0,9)
+        # print(i)
+        # print(p[i])
+        p[i].sendline(f'\\sendgrp grp {i} I am Here {str(datetime.datetime.timestamp(datetime.datetime.now()))}')
+except KeyboardInterrupt:
+    for i in range(10):
+        p[i].close()

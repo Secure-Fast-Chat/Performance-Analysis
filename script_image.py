@@ -42,9 +42,9 @@ while True:
     i = random.randint(0,n-1)
     try:
         time.sleep(abs(random.gauss(0.1,0.05)))
-        sendMsgCommand = '\send ' + str(random.randint(0,n-1)) + '0'*random.randint(0,400)
+        sendMsgCommand = '\send ' + str(random.randint(0,n-1)) +' '+ '0'*random.randint(0,400)
         k = random.random()
-        # print(k)
+        print(k)
         # p[i].sendline(sendMsgCommand.encode('utf-8'))
         if k>args.ratio_img_senders:
             p[i].sendline(sendMsgCommand.encode('utf-8'))
@@ -64,4 +64,4 @@ os.system("cat SecureFastChatlogs_* | grep Sent | cut -d ':' -f 1 > send_time")
 # os.system("awk '{if(FR==NFR){countr++;sumr+=$1}else{counts++;sums+=$1}}END{print(sumr-sums);print(countr,counts)}' recv_time send_time")
 os.system("awk '{count++;if(NR==FNR){countr++;sumr+=$1} else {if(counts<countr){counts++;sums+=$1}}}END{print(sumr-sums);print(countr);print(counts)}' recv_time send_time")
 
-os.system("rm SecureFastChat*")
+# os.system("rm SecureFastChat*")

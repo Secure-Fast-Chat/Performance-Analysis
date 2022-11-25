@@ -1,0 +1,2 @@
+sudo cpulimit -p <pid> -l 1 &
+prlimit --pid <pid> --as=2048000000

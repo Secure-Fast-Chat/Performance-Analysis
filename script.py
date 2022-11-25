@@ -3,13 +3,19 @@ import os
 import datetime
 import time
 import os
+import argparse
 
 # s = process(['python3', 'loadbalancer.py'],cwd='../Server-Side')
 # time.sleep(2)
 # print(s.recv().decode('utf-8'))
+parser = argparse.ArgumentParser()
+parser.add_argument("--num_users", type = int, required = True)
+args = parser.parse_args()
+
+
 
 p = []
-n=100
+n=args.num_users
 for i in range(n):
     time.sleep(0.01)
     p.append(process(['python3','../Client_Side/app.py']))

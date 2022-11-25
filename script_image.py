@@ -4,13 +4,20 @@ import os
 import datetime
 import time
 import os
+import argparse
 
 # s = process(['python3', 'loadbalancer.py'],cwd='../Server-Side')
 # time.sleep(2)
 # print(s.recv().decode('utf-8'))
 
+parser = argparse.ArgumentParser()
+parser.add_argument("--num_users", type = int, required = True)
+parser.add_argument("--ratio_img_senders", type = float, required = True)
+args = parser.parse_args()
+
+
 p = []
-n=10
+n=args.num_users
 for i in range(n):
     time.sleep(0.01)
     p.append(process(['python3','../Client_Side/app.py']))
@@ -39,7 +46,7 @@ while True:
         k = random.random()
         print(k)
         # p[i].sendline(sendMsgCommand.encode('utf-8'))
-        if k>0.1:
+        if k>args.ratio_img_senders:
             p[i].sendline(sendMsgCommand.encode('utf-8'))
         else:
             p[i].sendline(b'\sendfile 9 image.jpg')

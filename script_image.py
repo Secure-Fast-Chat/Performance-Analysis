@@ -42,14 +42,14 @@ while True:
     i = random.randint(0,n-1)
     try:
         time.sleep(abs(random.gauss(0.1,0.05)))
-        sendMsgCommand = '\send ' + str(random.randint(0,n-1)) +' '+ '0'*random.randint(0,400)
+        sendMsgCommand = '\send ' + str(random.randint(0,n+5)) +' '+ '0'*random.randint(0,400)
         k = random.random()
         print(k)
         # p[i].sendline(sendMsgCommand.encode('utf-8'))
         if k>args.ratio_img_senders:
             p[i].sendline(sendMsgCommand.encode('utf-8'))
         else:
-            p[i].sendline(b'\sendfile 9 image.jpg')
+            p[i].sendline('\sendfile ' +str(random.randint(0,n+5)) + ' image.jpg')
     except KeyboardInterrupt:
         print(i)
         break
@@ -60,7 +60,7 @@ while True:
 
 time.sleep(10)
 os.system("cat SecureFastChatlogs_* | grep Rec | cut -d ':' -f 1 > recv_time")
-os.system("cat SecureFastChatlogs_* | grep Sent | cut -d ':' -f 1 > send_time")
+os.system(f"cat SecureFastChatlogs_* | grep Sent | grep -v 'Message Sent to {n}'| grep -v 'Message Sent to {n+1}'| grep -v 'Message Sent to {n+2}'| grep -v 'Message Sent to {n+3}'| grep -v 'Message Sent to {n+4}'| grep -v 'Message Sent to {n+5}'|cut -d ':' -f 1 > send_time")
 # os.system("awk '{if(FR==NFR){countr++;sumr+=$1}else{counts++;sums+=$1}}END{print(sumr-sums);print(countr,counts)}' recv_time send_time")
 os.system("awk '{count++;if(NR==FNR){countr++;sumr+=$1} else {if(counts<countr){counts++;sums+=$1}}}END{print(sumr-sums);print(countr);print(counts)}' recv_time send_time")
 

@@ -37,7 +37,7 @@ while True:
     count+=1
     if count == 20:
         os.system('rm SecureFastChat*')
-    if count == 169:
+    if count == 219:
         break
     i = random.randint(0,n-1)
     try:
